@@ -36,4 +36,5 @@ public:
 	CString input;
 	CString output;
 	int SplitStringArray(CString str, char split, CStringArray& aStr);
+	afx_msg void OnBnClickedSudokucal();
 };

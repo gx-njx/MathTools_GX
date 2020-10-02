@@ -11,4 +11,18 @@ a1,b1,c1,d1
 a2,b2,c2,d2  
 a3,b3,c3,d3  
 然后点击“方程组计算”按钮即可  
-本模块的代码在MathToolsDlg.cpp中的OnBnClickedEquationscal（L164）
+本模块的代码在MathToolsDlg.cpp中的OnBnClickedEquationscal（L166）
+# 解算数独
+要求是可解算的数独，程序采用回溯算法，未对错误进行处理。  
+数独实例：  
+0,6,1,0,3,0,0,2,0  
+0,5,0,0,0,8,1,0,7  
+0,0,0,0,0,7,0,3,4  
+0,0,9,0,0,6,3,7,8  
+0,0,3,2,7,9,5,0,0  
+5,7,0,3,0,0,9,0,2  
+1,9,0,7,6,0,0,0,0  
+8,0,2,4,0,0,7,6,0  
+6,4,0,0,1,0,2,5,0  
+其中0是未知数，点击“数组解算”  
+本模块代码在Sudoku.h,Sudoku.cpp,MathToolsDlg.cpp中的OnBnClickedSudokucal（L216）
