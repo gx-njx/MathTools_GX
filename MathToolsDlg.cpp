@@ -8,6 +8,7 @@
 #include "MathToolsDlg.h"
 #include "afxdialogex.h"
 #include "Matrix.h"
+#include "Sudoku.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -71,6 +72,7 @@ BEGIN_MESSAGE_MAP(CMathToolsDlg, CDialogEx)
 	ON_WM_PAINT()
 	ON_WM_QUERYDRAGICON()
 	ON_BN_CLICKED(IDC_EquationsCal, &CMathToolsDlg::OnBnClickedEquationscal)
+	ON_BN_CLICKED(IDC_SudokuCal, &CMathToolsDlg::OnBnClickedSudokucal)
 END_MESSAGE_MAP()
 
 
@@ -208,4 +210,41 @@ int CMathToolsDlg::SplitStringArray(CString str, char split, CStringArray& aStr)
 	if (!sTmp.IsEmpty())
 		aStr.Add(sTmp);
 	return aStr.GetSize();
+}
+
+
+void CMathToolsDlg::OnBnClickedSudokucal()
+{
+	// TODO: 在此添加控件通知处理程序代码
+	UpdateData(true);
+	CStringArray lines, tem;
+	int sudo[9][9];
+	int nline = SplitStringArray(input, 13, lines);
+	if (nline < 9) {
+		MessageBox(_T("参数不足,空缺请填充0"), _T("输入错误"), 0);
+		return;
+	}
+	for (int i = 0; i < nline; i++) {
+		int nnum = SplitStringArray(lines[i], ',', tem);
+		if (nnum < 9) {
+			MessageBox(_T("参数不足,空缺请填充0"), _T("输入错误"), 0);
+			return;
+		}
+		for (int j = 0; j < nnum; j++) {
+			sudo[i][j] = _tstoi(tem[j]);
+		}
+	}
+	Sudoku Sudo(sudo);
+	bool tag = Sudo.Callback(0, 0);
+	output = _T("");
+	CString tem2;
+	for (int i = 0; i < 9; i++) {
+		for (int j = 0; j < 9; j++) {
+			tem2.Format(_T("%d,"), Sudo.sudo[i][j]);
+			if (j == 8)tem2.Remove(',');
+			output += tem2;
+		}
+		output += _T("\r\n");
+	}
+	UpdateData(false);
 }
